@@ -50,7 +50,7 @@ Take a moment now and setup your Cloud9 development environment
 
 **NOTE**: _In case of an error like “failed to create because the instance type t3.small isn't available in the requested Availability Zone” go back to the wizard and recreate environment in a supported AZ._
 
-1. Once ready, your IDE will open to a welcome screen. Below that, you should see a terminal prompt similar to:
+8. Once ready, your IDE will open to a welcome screen. Below that, you should see a terminal prompt similar to:
 
 ![alt text](./images/image_c9-2.png)
 
@@ -121,7 +121,7 @@ Once the devops-cluster stack reaches the CREATE_COMPLETE status, we can see tha
 
 ![alt text](./images/image_cfn-4.png)
 
-1. Once it finishes we can review if everything was setup as expected. Just go to the CloudFormation Outputs tab and click on the ExternalUrl link. The resulting website should look something similar like this:
+2. Once it finishes we can review if everything was setup as expected. Just go to the CloudFormation Outputs tab and click on the ExternalUrl link. The resulting website should look something similar like this:
     
 
 ![alt text](./images/image_test.png)
@@ -132,7 +132,7 @@ As we can see, it is a simple web page that we are going to use during this exer
 
 If you walk through the *Resources* tab in CloudFormation, you will see what has been deployed, the key components that we can observe are: ECS Cluster, the Task Definition, the Service running 2 Tasks based on the definition and the Load Balancer with one listener and 2 target groups (one of them is not being used right now). Feel free to explore the different configuration that were done during the setup.
 
-1. Ok, now we are ready to move on with the workshop itself. Let's get started!
+3. Ok, now we are ready to move on with the workshop itself. Let's get started!
 
 ### **Stage 1: Create an AWS CodeCommit Repository**
 
@@ -196,7 +196,7 @@ cd ~/environment/MyRepo
 git add *
 ```
 
-1. Run ***git commit*** to commit the change:
+3. Run ***git commit*** to commit the change:
 
 
 ```bash
@@ -207,7 +207,7 @@ git commit -m "Initial Commit"
 
 ![alt text](./images/image_gitlog.png)
 
-1. Run ***git push*** to push your commit through the default remote name Git uses for your AWS CodeCommit repository (origin), from the default branch in your local repo (master):
+4. Run ***git push*** to push your commit through the default remote name Git uses for your AWS CodeCommit repository (origin), from the default branch in your local repo (master):
 
 ```bash
 git push -u origin master
@@ -242,8 +242,8 @@ aws cloudformation create-stack --stack-name DevopsWorkshop-roles --template-bod
 
 ***💡 Tip*** To learn more about AWS CloudFormation, please refer to [AWS CloudFormation UserGuide.](https://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/Welcome.html)
 
-1. Upon completion take a note on the service roles created. Check [describe-stacks](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-stacks.html) to find the output of the stack.
-2. For Console, refer to the CloudFormation [Outputs tab](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-view-stack-data-resources.html) to see output. ***Sample Output:*** 
+2. Upon completion take a note on the service roles created. Check [describe-stacks](http://docs.aws.amazon.com/cli/latest/reference/cloudformation/describe-stacks.html) to find the output of the stack.
+3. For Console, refer to the CloudFormation [Outputs tab](http://docs.aws.amazon.com/AWSCloudFormation/latest/UserGuide/cfn-console-view-stack-data-resources.html) to see output. ***Sample Output:*** 
     
 
 ![alt text](./images/image_stacks.png)
@@ -262,7 +262,7 @@ Let's begin with the requirements first:
 cp ~/environment/setup/SampleApp/Dockerfile ~/environment/MyRepo/
 ```
 
-1. Let's inspect the Dockerfile quickly with **more** command:
+2. Let's inspect the Dockerfile quickly with **more** command:
 
 ```bash
 more ~/environment/MyRepo/Dockerfile
@@ -271,7 +271,7 @@ more ~/environment/MyRepo/Dockerfile
 
 As you can see, this is a really simple container configuration file in which we use ngnix as a base image and instruct to copy the web app files to nginx default route.
 
-1. Push the Dockerfile to the Code Commit Repo:
+3. Push the Dockerfile to the Code Commit Repo:
 
 ```bash
 git add Dockerfile
@@ -358,7 +358,7 @@ In this Build Specification, we can find the following structure:
 
 ***Note*** Visit this [page](http://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) to know more about build spec and how you can use multiple build specs in the same repo.
 
-### 1. Commit & push the build specification file to repository
+### 4. Commit & push the build specification file to repository
 
 ```bash
 git add buildspec.yaml
@@ -379,7 +379,7 @@ For information about how to create a well-formed AppSpec file, see [CodeDeploy 
 
 Create a file named ***appspec.yaml*** under *MyRepo* folder. 
 
-Copy the content below, DO NOT REPLACE <TASK_DEFINITION>, leave the text as is as it will be required by CodeDeploy to dynamically adjust the TASK_DEFINITION value. 
+Copy the content below, *DO NOT REPLACE <TASK_DEFINITION>*, leave the text as is as it will be required by CodeDeploy to dynamically adjust the TASK_DEFINITION value. 
 
 The latter is because with each new container image we get a new revision of the task definition, for example: if the revision was webapp:2, after pushing the newly built image we will have a new revision webapp:3. In normal conditions we would need to update the taskdefinition value in some way, most likely manually or with complex scripts. In this case CodeDeploy will do the magic for us.
 
@@ -398,7 +398,7 @@ Resources:
 
 In this AppSpec configuration, along with the Task Definition we are giving the information of the container name we are updating and the container port as well. 
 
-This is a quite simple file, you can explore more cool features like the AppSpec hooks in order to execute functions during the different stages of the new deployment to achieve more advanced objectives, for example: stop certain tasks from executing before the deployment, perform validations before shifting traffic to new task, perform validations after deployment, etc. 
+This is a quite simple file, you can explore cooler features like the AppSpec hooks in order to execute functions during the different stages of the new deployment to achieve more advanced objectives, for example: stop certain tasks from executing before the deployment, perform validations before shifting traffic to new task, perform validations after deployment, etc. 
 
 For more information about AppSpec hooks you can check the [documentation](https://docs.aws.amazon.com/codedeploy/latest/userguide/reference-appspec-file-structure-hooks.html).
           
