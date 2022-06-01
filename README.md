@@ -102,7 +102,7 @@ chmod +x setup.sh
 ./setup.sh
 ```
 
-This process will take several minutes as it need to deploy several resources which are dependent on each other in most cases, for example the ECS Service won't be created until the Load Balancer and it's Listener are created and configured.
+This process will take several minutes as it needs to deploy several resources which are dependent on each other in most cases, for example the ECS Service won't be created until the Load Balancer and it's Listener are created and configured.
 
 Wait until **(STEP 9)** is set, meanwhile you can go to the [CloudFormation console](https://console.aws.amazon.com/cloudformation) to see how is it going.  Just click on the cloud9 logo (upper left corner) and select Go to your dashboard.
 
