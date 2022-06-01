@@ -175,10 +175,10 @@ git clone codecommit::<YOUR-REGION>://MyRepo
 You would be seeing the following message if cloning is successful. ***warning: You appear to have cloned an empty repository.***
 
 
-## **Stage 3: Upload app code to the repo**
+### **Stage 3: Upload app code to the repo**
 
 
-1. Copy all the relevant ***contents*** of the SampleApp folder to your local repo folder.
+1. Copy all the ***relevant contents*** of the SampleApp folder to your local repo folder.
 
 ```bash
 cp ~/environment/setup/SampleApp/index.html ~/environment/setup/SampleApp/AWS_logo.png MyRepo/
@@ -217,7 +217,7 @@ git push -u origin master
 For more information, see [Browse the Contents of a Repository](http://docs.aws.amazon.com/codecommit/latest/userguide/how-to-browse.html).
 * * *
 
-***💡 Tip* ***How to see the Commit Id?*
+***💡 Tip*** ***How to see the Commit Id?***
 
 You can see all the commits to the repository easily. From the CodeCommit console go to Repositories > Commits.
 
@@ -358,7 +358,7 @@ In this Build Specification, we can find the following structure:
 
 ***Note*** Visit this [page](http://docs.aws.amazon.com/codebuild/latest/userguide/build-spec-ref.html) to know more about build spec and how you can use multiple build specs in the same repo.
 
-### 4. Commit & push the build specification file to repository
+**4. Commit & push the build specification file to repository**
 
 ```bash
 git add buildspec.yaml
@@ -366,7 +366,7 @@ git commit -m "adding buildspec.yaml"
 git push -u origin master
 ```
 
-***Challenge*** How would you look into the Commit ID?
+***Challenge*** *How would you look into the Commit ID?*
 
 ### ***5.2. Prepare the application deployment specs:***
 
@@ -379,7 +379,7 @@ For information about how to create a well-formed AppSpec file, see [CodeDeploy 
 
 Create a file named ***appspec.yaml*** under *MyRepo* folder. 
 
-Copy the content below, *DO NOT REPLACE <TASK_DEFINITION>*, leave the text as is as it will be required by CodeDeploy to dynamically adjust the TASK_DEFINITION value. 
+Copy the content below, **DO NOT REPLACE <TASK_DEFINITION>**, leave the text as is as it will be required by CodeDeploy to dynamically adjust the TASK_DEFINITION value. 
 
 The latter is because with each new container image we get a new revision of the task definition, for example: if the revision was webapp:2, after pushing the newly built image we will have a new revision webapp:3. In normal conditions we would need to update the taskdefinition value in some way, most likely manually or with complex scripts. In this case CodeDeploy will do the magic for us.
 
@@ -422,10 +422,10 @@ aws ecs describe-task-definition --task-definition $TASK_DEFINITION \
 
 ```
 
-Regardless on how the taskdef.json file is created, we need to change the following line:
+Regardless on how the taskdef.json file is created, we need to change the following line (*most likely line 21*):
 
 ```bash
-"image": "<accountID>.[dkr.ecr.us-east-1.amazonaws.com/webapp-:latest](http://dkr.ecr.us-east-1.amazonaws.com/webapp-%3CaccountID%3E:latest)",
+"image": "<accountID>.dkr.ecr.us-east-1.amazonaws.com/webapp:latest",
 ```
 
 to:
@@ -447,7 +447,7 @@ git push -u origin master
 ```
 
 
-Now, we are going to create the required configurations on CodeDeploy to use later on our pipeline. Let's go to [*CodeDeploy Console*](https://us-east-1.console.aws.amazon.com/codesuite/codedeploy/applications?region=us-east-1)and click on *Create application*. 
+Moving on, we are going to create the required configurations on CodeDeploy to use later on our pipeline. Let's go to [*CodeDeploy Console*](https://us-east-1.console.aws.amazon.com/codesuite/codedeploy/applications?region=us-east-1)and click on *Create application*. 
 
 
 1. Under application name choose a name for the application, for example: *devops-workshop-MyWebApp*.
@@ -533,7 +533,7 @@ Now, it is time to tie together all we have been doing so far. Go to the [CodePi
 ![alt text](./images/image_logs.png)
 
 
-1. Click on *Continue to CodePipeline* to return to the CodePipeline console. The Project name will be populated automatically. Click on *Next*.
+7. Click on *Continue to CodePipeline* to return to the CodePipeline console. The Project name will be populated automatically. Click on *Next*.
 
 ![alt text](./images/image_build-2.png)
 
@@ -549,7 +549,7 @@ Now, it is time to tie together all we have been doing so far. Go to the [CodePi
 6. Under Dynamically update task definition image choose: *BuildArtifact* and write *IMAGE1_NAME* as a placeholder. This will allow CodeDeploy to update the task definition image. Click Next.
 
 
-![alt text](./images/image_build-2.png)
+![alt text](./images/image_deploy-1.png)
 
 7. Click on *Next*.
 
