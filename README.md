@@ -265,10 +265,9 @@ cp ~/environment/setup/SampleApp/Dockerfile ~/environment/MyRepo/
 1. Let's inspect the Dockerfile quickly with **more** command:
 
 ```bash
-`FROM nginx:latest`
-MAINTAINER DevOpsWorkshop
-COPY . /usr/share/nginx/html
+more ~/environment/MyRepo/Dockerfile
 ```
+![alt text](./images/image_docker.png)
 
 As you can see, this is a really simple container configuration file in which we use ngnix as a base image and instruct to copy the web app files to nginx default route.
 
