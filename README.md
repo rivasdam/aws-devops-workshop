@@ -8,7 +8,7 @@ More updates to come. Stay tuned!***
 *What we will cover*:
 - Setup of a Cloud9 environment
 - Deployment of required infrastructure including Amazon Elastic Container Service with Fargate and ECR repository
-- Deploy and use a modernized pipeline using AWS CodePipeline, CodeBuild, and CodeBuild
+- Deploy and use a modernized pipeline using AWS CodePipeline, CodeBuild, and CodeCommit
 
 
 ![alt text](./images/image_devops.png)
